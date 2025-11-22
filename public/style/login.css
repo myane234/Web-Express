@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f0f0f0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* ← TAMBAHIN INI */
+}
+
+.container {
+    height: 50vh;
+    gap: 20px;
+    width: 40%;
+    display: flex;
+    flex-direction: column; /* ← UBAH KE COLUMN */
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    padding: 20px; /* ← GANTI MARGIN DENGAN PADDING */
+}
+
+.form-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* ← UBAH KE COLUMN */
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+label {
+    margin: 5px 0;
+}
+
+input {
+    border: none;
+    width: 200px; /* ← PERBESAR DARI 100px */
+    padding: 8px;
+    border-radius: 4px;
+}
+
+button {
+    padding: 8px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px; /* ← KASIH JARAK ATAS */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
