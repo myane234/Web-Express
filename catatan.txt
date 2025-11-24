@@ -1,0 +1,5 @@
+npx tsc --init to make tsconfig.json file
+npx tsc --build to compile typescript to javascript
+npx ts-node src/index.ts to run typescript file directly without compiling
+npm install @types/express --save-dev to install express type definitions
+npm install -D @types/node to install node type definitions
