@@ -4,8 +4,7 @@ export const db = mysql2.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: '',
-    port: 80,
+    database: 'latihan_rest',
 })
 
 db.getConnection()
