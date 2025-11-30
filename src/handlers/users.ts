@@ -105,12 +105,13 @@ export async function register(req: Request, res: Response) {
     const salt = 10;
 
     try {
-        const [checkusers] = await db.query("INSER INTO users WHERE nama = ?", [nama]) as any[]
+        const [checkusers] = await db.query("SELECT * FROM users WHERE nama = ?", [nama]) as any[]
 
         if(checkusers.length > 0) {
             return res.status(400).json({
                 message: 'username udah di pake',
-                sukses: 'false'
+                check: true,
+                sukses: false
             })
         }
 
@@ -126,6 +127,43 @@ export async function register(req: Request, res: Response) {
         console.error(err)
         return res.status(500).json({
             message: 'Server error',
+            sukses: false
+        })
+    }
+}
+
+
+//delete
+
+export async function deleteUsers(req: Request, res: Response) {
+    const usersID = req.params.id;
+    try {
+
+        if(!usersID) {
+            return res.status(400).json({
+                message: "Users Tidak di temukan",
+                sukses: false
+            })
+        }
+
+        const [users] = await db.query("DELETE FROM users WHERE id = ?", [usersID]) as any[];
+
+        if(users.affectedRows === 0) {
+            return res.status(400).json({
+                message: 'Users gak di temukan',
+                sukses: false
+            })
+        }
+        
+        return res.status(200).json({
+            message: 'Berhasil mengahapus',
+            sukses: true
+        })
+
+    } catch(err) {
+        console.error(err)
+        return res.status(500).json({
+            message: 'Server Error',
             sukses: false
         })
     }

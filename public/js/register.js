@@ -17,10 +17,18 @@ register.addEventListener('submit', async (e) =>  {
 
     const data = await res.json();
 
+    
+
     if(data.sukses) {
         pesan.textContent = 'Berhasil register'
         window.location.href = '/login'
     } else {
+
+        if(data.check) {
+        pesan.textContent = 'Sudah ada Users lain'
+    } else {
         pesan.textContent = 'gagal register'
+    }
+        
     }
 })

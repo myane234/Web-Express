@@ -5,6 +5,7 @@ import usersRoutes from './routes/users/users.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { login, register } from './handlers/users.js';
+import { db ,setupDb } from './config/setup.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,6 +42,15 @@ app.post('/login', login)
 
 app.use('/api', usersRoutes);
 
+
+async function start () {
+
+    await setupDb();
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 })
+
+}
+
+start();
