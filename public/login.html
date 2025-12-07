@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Users</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Login Page</h1>
+        <form  id="loginForm" method="POST">
+            <label for="Nama">Nama:</label>
+            <input type="text" id="Nama" name="Nama" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="button" onclick="clickToggle()">Show/Hide</button>
+            <br>
+            <button type="submit">Login</button>
+        </form>
+        <a href="/">Balik</a>
+        <a href="/updatepwC">Ganti Password</a>
+
+       <p>Belum punya akun? <a href="/register.html">Daftar</a></p>
+
+        <p id="pesan"></p>
+
+        <script src="/js/login.js"></script>
+    </div>
+</body>
+</html>
