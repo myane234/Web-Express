@@ -40,10 +40,11 @@ export async function LoginUser(req: Request, res: Response) {
 }
 
 export async function RegisterUser (req: Request, res: Response) {
-    const {nama, password, telepon} = req.body;
+    const {nama, password, telepon, email} = req.body;
     try {
         const [checkUsers]: any = await db.query(`SELECT * FROM users WHERE nama = ?`, [nama]);
         const [checkTelepon]:any = await db.query(`SELECT * FROM users WHERE telepon = ?`, [telepon])
+        const [checkEmail]: any = await db.query(`SELECT * FROM users WHERE email = ?`, [email]);
 
         if(checkUsers.length > 0) {
             return res.status(400).json({
@@ -57,9 +58,15 @@ export async function RegisterUser (req: Request, res: Response) {
             })
         }
 
+        if(checkEmail.length > 0) {
+            return res.status(400).json({
+                message: 'udah Ada email lain', sukses: false
+            })
+        }
+
         const hashPw = await bcrypt.hash(password, 10);
 
-        await db.query('INSERT INTO users (nama, password, telepon) VALUES (?, ?, ?)', [nama, hashPw, telepon]);
+        await db.query('INSERT INTO users (nama, password, telepon, email) VALUES (?, ?, ?)', [nama, hashPw, telepon, email]);
         return res.status(200).json({
             message: 'Register Sukses', sukses: true
         })

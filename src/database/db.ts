@@ -9,11 +9,3 @@ export const db = mysql2.createPool({
     port: 3307,
 })
 
-async function testConn(){
-    const conn = await db.getConnection();
-    console.log(`Database Connected: ${conn.connection.threadId}`);
-    conn.release();
-}
-
-testConn();
-

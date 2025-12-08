@@ -20,6 +20,7 @@ export async function setupDb() {
             nama VARCHAR(150) UNIQUE NOT NULL,
             password VARCHAR(100) NOT NULL,
             telepon VARCHAR(30) UNIQUE NOT NULL,
+            email VARCHAR(100) UNIQUE NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )`)
             console.log(`Table Users Sudah di buat`);
@@ -27,7 +28,8 @@ export async function setupDb() {
        const [users]:any =  await pool.query(`SELECT * FROM users`);
 
        if(users.length === 0){
-            await pool.query(`INSERT INTO users (nama, password, telepon) VALUES ('admin', '$2b$10$pfIw6PlQ1sN60J00P.x45.eeGw3FFlj7SJjBkv5eieD.1ObPlkjOW', '085721829539')`)
+            await pool.query(`INSERT INTO users (nama, password, telepon, email) VALUES ('admin',
+                 '$2b$10$pfIw6PlQ1sN60J00P.x45.eeGw3FFlj7SJjBkv5eieD.1ObPlkjOW', '085721829539', 'flytothemoonkawaii@gmail.com')`)
             // pw nya, pw legend 123
        }
 

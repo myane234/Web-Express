@@ -11,6 +11,10 @@ function clickToggle(){
     }
 }
 
+function validEmail(email) {
+    return email.includes('@') && email.includes('.');
+} 
+
 
 
 registForm.addEventListener('submit', async (e) => {
@@ -19,6 +23,19 @@ registForm.addEventListener('submit', async (e) => {
     const nama = document.getElementById('Nama').value;
     const password = document.getElementById('password').value;
     const telepon = document.getElementById('telepon').value;
+    const email = document.getElementById('email').value;
+
+    if(!email.trim()) {
+        pesan.innerText = 'Email tidak boleh kosong.';
+        pesan.style.color = 'red';
+        return;
+    }
+
+    if(!validEmail(email)) {
+        pesan.innerText = 'Email harus ada @';
+        pesan.style.color = 'red';
+        return
+    }
 
     const teleponclean = telepon.replace(/\D/g, '').replace(/^0/, '62');
 
@@ -39,7 +56,7 @@ registForm.addEventListener('submit', async (e) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ nama, password, telepon: teleponclean })
+        body: JSON.stringify({ nama, password, telepon: teleponclean, email })
     })
 
     const data = await res.json();
