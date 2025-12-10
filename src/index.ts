@@ -33,6 +33,10 @@ app.get('/register', (req: Request, res: Response) => {
 app.get('/menu', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'menu.html'));
 })
+    
+app.get('/resetPassword', (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'resetPassword.html'));
+})
 
 app.get('/updatepwC', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'updatePWC.html'));

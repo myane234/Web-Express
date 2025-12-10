@@ -4,6 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu AI</title>
+    <style>
+        .container {
+            width: 400px;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            margin: 40px;
+        }
+
+        input {
+            margin: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -12,6 +35,22 @@
         <button onclick="kirim()">Tanya</button>
 
         <p id="hasil"></p>
+    </div>
+    <div class="data">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>nama</th>
+                    <th>telepon</th>
+                    <th>email</th>
+                    <th>aksi</th>
+                </tr>
+            </thead>
+            <tbody id="dataBody">
+             <!--data disini-->   
+            </tbody>
+        </table>
     </div>
 
     <script src="js/menu.js"></script>

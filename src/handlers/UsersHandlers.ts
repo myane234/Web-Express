@@ -5,6 +5,7 @@ import cyrpto from 'crypto';
 //MODULE
 import { sendResetPassword } from '../mailTamp/resetPw.js';
 import {db} from '../database/db.js'
+import { createResetToken } from './resetPassword.js';
 
 
 export async function getAllUsers(req: Request, res: Response) {
@@ -19,6 +20,25 @@ export async function getAllUsers(req: Request, res: Response) {
     } catch(err) {
         res.status(500).json({message: 'Internal Server Error', sukses: false});
     }
+}
+
+export async function getAllUsersByParams(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+        const [users]: any = await db.query(`DELETE FROM users WHERE id = ?`,
+            [id]
+        )
+
+        if(users.length === 0) {
+            return  res.status(404).json({message: 'Gak nemu Users', sukses: false});
+        }
+
+        return res.status(200).json({message: 'Berhasil di apus', sukses: true});
+    } catch(err) {
+        console.error(err);
+        res.status(500).json({message: 'Internal Server Error', sukses: false});
+    } 
 }
 
 export async function LoginUser(req: Request, res: Response) {
@@ -104,28 +124,6 @@ export async function RegisterUser (req: Request, res: Response) {
 //     }
 // }
 
-async function createResetToken(userId: number, hoursValid: 1) {
-    const token = cyrpto.randomBytes(32).toString('hex');
-    const exipiredAt = new Date(Date.now() + hoursValid * 60 * 60 * 1000);
-
-    await db.query(`INSERT INTO resetpass (user_id, token, expired_at) VALUES (?, ?, ?)`, 
-    [userId, token, exipiredAt]);
-
-    return token;
-} 
-
-
-async function getValidResetToken(token: string) {
-    const [rows]: any = await db.query(`SELECT pr.*, u.email, u.id as user_id FROM passwod_resets pr
-    JOIN users u ON pr.user_id = u.id
-    WHERE pr.token = ? AND pr.used = 0 AND pr.expired_at > NOW()`, [token]);
-
-    return rows[0] ?? null; 
-}
-
-async function markTokenAsUsed(tokenId: number) {
-    await db.query(`UPDATE resetpass SET used = 1 WHERE id = ?`, [tokenId]);
-}
 
 export async function checkEmail(req: Request, res: Response) {
     const { email } = req.body;

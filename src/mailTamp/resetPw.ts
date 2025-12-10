@@ -17,7 +17,7 @@ const sender = {
 
 export async function sendResetPassword(email: string, resetToken: string) {
   try {
-    const resetLink = `http://localhost:3000/updatePWC.html?token=${resetToken}`;
+    const resetLink = `http://localhost:3000/resetPassword?token=${resetToken}`;
     const response = await transport.sendMail({
       from: sender,
       to: [email],
