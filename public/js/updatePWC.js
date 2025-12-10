@@ -4,15 +4,15 @@ const pesan = document.getElementById('pesan');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const telepon = document.getElementById('Telepon').value;
+    const email = document.getElementById('Email').value;
 
     try {
-        const res = await fetch('/api/checkTelepon', {
+        const res = await fetch('/api/checkEmail', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ telepon })
+            body: JSON.stringify({ email })
         })
 
 
@@ -20,6 +20,7 @@ form.addEventListener('submit', async (e) => {
 
         if(data.sukses) {
             pesan.innerText = data.message
+            alert(data.isi)
             window.location
         } else {
             pesan.innerText = data.message

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { checkTelepon, getAllUsers, LoginUser, RegisterUser } from "../handlers/UsersHandlers.js"
+import { checkEmail, getAllUsers, LoginUser, RegisterUser } from "../handlers/UsersHandlers.js"
 
 
 const route = Router();
@@ -10,6 +10,6 @@ route.post('/login', LoginUser)
 
 route.post('/register', RegisterUser)
 
-route.post('/checkTelepon', checkTelepon)
+route.post('/checkEmail', checkEmail)
 
 export default route;
