@@ -2,6 +2,7 @@ import type{ Request, Response } from "express";
 import bcrypt, { compare } from 'bcrypt'
 import { db } from "../database/db.js";
 
+
 export async function register(req: Request, res: Response) {
     const { nama, password } = req.body;
     try {
@@ -66,6 +67,8 @@ export async function login(req: Request, res: Response) {
             })
         }
 
+
+        req.User
         return res.status(200).json({
             message: 'Ditemukan',
             sukses: true

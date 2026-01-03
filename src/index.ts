@@ -1,5 +1,7 @@
 import express from 'express';
 import type { Request, Response } from 'express';
+import cookie from 'cookie-parser'
+import session from 'express-session'
 import 'dotenv/config'
 import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from './swagger.js';
@@ -16,7 +18,20 @@ import { setupDb } from './database/setup.js';
 
 
 const app = express();
+
 app.use(express.json());
+app.use(cookie())
+app.use(session({
+    secret: 'rahasia',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: false,
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000
+    }
+}))
+
 const PORT = process.env.PORT || 80;
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
