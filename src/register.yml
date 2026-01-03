@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: API Title
+  version: '1.0'
+  description: register user
+servers:
+  - url: http://localhost
+paths:
+  /user/register:
+    post:
+      summary: register new User
+      tags:
+        - user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              required:
+                - nama
+                - password
+              properties:
+                nama: 
+                  type: string
+                  example: faruq
+                password:
+                  type: string
+                  format: password
+                  example: "123"
+      responses:
+        '200':
+          description: OK
